@@ -1,10 +1,23 @@
 # flink-snowflake-connector-sink-app
 Pipe streaming data into snowflake table using flink snowflake connector
 
-## Local kafka setup
+__Local kafka setup__
 
 ```sh
 docker compose up
+```
+
+### Publishing a message to the Kafka topic
+Let the topic be `snow-topic` and the message be in `myMessage.txt`
+```sh
+kcat -b 127.0.0.1:9092 -t snow-topic -P example.txt
+````
+
+### Consuming the message from the Kafka topic
+```sh
+kcat -b 127.0.0.1:9092 -t snow-topic -C -f 'Topic %t, partition %p, offset %o, key %k: %s\n'
+
+kcat -b 127.0.0.1:9092 -t snow-topic -p 0 -o 5 -C -f 'Topic %t, partition %p, offset %o, key %k: %s\n'
 ```
 
 ## Local Flink cluster setup
