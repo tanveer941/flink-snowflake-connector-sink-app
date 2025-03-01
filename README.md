@@ -73,6 +73,10 @@ It becomes important to map the JSON data produced by kafka into the Java class 
 ./flink run /Users/you/path/to/target/jarfile.jar
 ```
 
+### Viewing the job in the Flink dashboard
+Visit `http://localhost:8081/` to see the status of the running jobs.
+![Flink Dashboard](local-kafka-docker/flink-dashboard.png)
+
 ## Send the Kafka message and verifying it in Snowflake table
 ### Publishing a message to the Kafka topic
 Let the topic be `snow-topic` and the message be in `myMessage.txt`
