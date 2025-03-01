@@ -1,6 +1,7 @@
 # flink-snowflake-connector-sink-app
 Pipe streaming data into snowflake table using flink snowflake connector
-![Architecture Diagram](local-kafka-docker/local-kafka-flink-snowflake-architecture.png)
+
+![Architecture Diagram](local-kafka-docker/local-kafka-flink-snowflake-sink-architecture.png)
 
 ## Local kafka setup
 
