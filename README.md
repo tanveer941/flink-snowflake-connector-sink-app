@@ -4,6 +4,7 @@ Pipe streaming data into snowflake table using flink snowflake connector
 ## Local kafka setup
 
 ```sh
+cd local-kafka-testing
 docker compose up
 ```
 
@@ -34,19 +35,31 @@ cd flink-1.19.1/bin
 ./start-cluster.sh
 ``` 
 
-```sh
-# Submit a jar to the cluster
-./flink run /Users/you/path/to/target/jarfile.jar
+
+### Java and maven version
+Java app is built using maven. The dependencies are added in the `pom.xml` file.
+Java and maven version are specified in the `pom.xml` file.
+```angular2html
+Apache Maven 3.9.9
+Maven home: /opt/homebrew/Cellar/maven/3.9.9/libexec
+Java version: 23.0.1, vendor: Homebrew, runtime: /opt/homebrew/Cellar/openjdk/23.0.1/libexec/openjdk.jdk/Contents/Home
+Default locale: en_IN, platform encoding: UTF-8
+OS name: "mac os x", version: "15.3.1", arch: "aarch64", family: "mac"
 ```
 
 ## Building the Java app
-
-### Java and maven version
-
-### command to build the Java app
+The output jar is built in the `target` directory
+```sh
+cd snowflake_mapping
+mvn package
+```
 
 ### Mapping the snowflake table columns, Kafka JSON message and the Java app serialization mapper class
 
 ## Running the JAR in the local Flink cluster
+```sh
+# Submit a jar to the cluster
+./flink run /Users/you/path/to/target/jarfile.jar
+```
 
 ## Send the Kafka message and verifying it in Snowflake table
