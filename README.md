@@ -1,7 +1,7 @@
 # flink-snowflake-connector-sink-app
 Pipe streaming data into snowflake table using flink snowflake connector
 
-__Local kafka setup__
+## Local kafka setup
 
 ```sh
 docker compose up
