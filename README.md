@@ -1,5 +1,6 @@
 # flink-snowflake-connector-sink-app
 Pipe streaming data into snowflake table using flink snowflake connector
+![Architecture Diagram](local-kafka-docker/local-kafka-flink-snowflake-architecture.png)
 
 ## Local kafka setup
 
@@ -8,11 +9,6 @@ cd local-kafka-testing
 docker compose up
 ```
 
-### Publishing a message to the Kafka topic
-Let the topic be `snow-topic` and the message be in `myMessage.txt`
-```sh
-kcat -b 127.0.0.1:9092 -t snow-topic -P example.txt
-````
 
 ### Consuming the message from the Kafka topic
 ```sh
@@ -55,6 +51,12 @@ mvn package
 ```
 
 ### Mapping the snowflake table columns, Kafka JSON message and the Java app serialization mapper class
+Snowflake credentials are put in the main function of the java app, in the file `FlinkSnowflakeJob.java`.
+It becomes important to map the JSON data produced by kafka into the Java class so that it dumps into snowflake seamlessly.
+
+* Make sure the snowflake destination table created has column names that match exactly as the JSON keys of the Kafka data stream
+* If the message to produced to the kafka topic is in myMessage.txt. The contents of the text file are as given below then the Snowflake table definition should be as subsequently shown.
+* Note: The JSON keys and snowflake table columns should not haveany special character apart from underscrore.
 
 ## Running the JAR in the local Flink cluster
 ```sh
@@ -63,3 +65,8 @@ mvn package
 ```
 
 ## Send the Kafka message and verifying it in Snowflake table
+### Publishing a message to the Kafka topic
+Let the topic be `snow-topic` and the message be in `myMessage.txt`
+```sh
+kcat -b 127.0.0.1:9092 -t snow-topic -P myMessage.txt
+````
