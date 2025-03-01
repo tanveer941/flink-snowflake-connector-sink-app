@@ -9,7 +9,11 @@ Pipe streaming data into snowflake table using flink snowflake connector
 cd local-kafka-testing
 docker compose up
 ```
-
+### Publishing a message to the Kafka topic
+Let the topic be `snow-topic` and the message be in `myMessage.txt`
+```sh
+kcat -b 127.0.0.1:9092 -t snow-topic -P myMessage.txt
+````
 
 ### Consuming the message from the Kafka topic
 ```sh
@@ -57,7 +61,11 @@ It becomes important to map the JSON data produced by kafka into the Java class 
 
 * Make sure the snowflake destination table created has column names that match exactly as the JSON keys of the Kafka data stream
 * If the message to produced to the kafka topic is in myMessage.txt. The contents of the text file are as given below then the Snowflake table definition should be as subsequently shown.
-* Note: The JSON keys and snowflake table columns should not haveany special character apart from underscrore.
+  Note: The JSON keys and snowflake table columns should not have any special character apart from underscore.
+* The Java class should have the mapping of the JSON keys to the Java class fields. The Java class should have the same fields as the snowflake table columns.
+* The Java class should have the same fields as the snowflake table columns.
+* The mapping of JSON data with java class is done `ExampleRecord.java` file. The name of the variables defined should be same as JSON keys.
+  The `ExampleEnrichedRecordToMapConverter.java` also must have mapping keys same as the JSON data and snowflake table column names
 
 ## Running the JAR in the local Flink cluster
 ```sh
