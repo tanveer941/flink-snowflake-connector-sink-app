@@ -66,6 +66,9 @@ It becomes important to map the JSON data produced by kafka into the Java class 
 * The Java class should have the same fields as the snowflake table columns.
 * The mapping of JSON data with java class is done `ExampleRecord.java` file. The name of the variables defined should be same as JSON keys.
   The `ExampleEnrichedRecordToMapConverter.java` also must have mapping keys same as the JSON data and snowflake table column names
+* Even if the JSON data is sent through Kafka with extra key-value pair. Data will land to snowflake table with only the columns defined in the table. Extra key-value pair will be ignored.
+* It is important that the mapping exist in Java class as part of the Flink job.
+* However, if the mapping does not exist in Java class as part of the Flink job. And you send data with extra key-value pair. The job will fail with error message.
 
 ## Running the JAR in the local Flink cluster
 ```sh
